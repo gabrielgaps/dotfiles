@@ -1,0 +1,23 @@
+#!/bin/sh
+
+numlockx &
+xbindkeys &
+ulimit -HS -r 40; mpd &
+slstatus &
+xset r rate 300 50 &
+xcompmgr &
+jackd -R -d alsa -dhw:0 -r48000 -p256 -n3 &
+#pulseaudio &
+pacmd set-default-sink jack_out &
+amixer set 'Master' 56 &
+#jackd -R -d alsa -d hw:PCH &
+xrdb -load ~/.Xresources &
+#wal -R &
+unclutter &
+# xwallpaper --stretch /home/gabriel/Downloads/4chin/sonic/0b6539a2834704427573852bd6c87274.jpg &
+xwallpaper --center /home/gabriel/Downloads/4chin/mmg/__zero_mega_man_and_1_more_drawn_by_zelitto__sample-e78efa6bf13a6cd22ec1a8f172521856.jpg &
+pcmanfm -d &
+redshift &
+#fcitx5
+#autocutsel -fork &
+#autocutsel -selection PRIMARY -fork
