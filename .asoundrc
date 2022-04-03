@@ -1,0 +1,38 @@
+# convert alsa API over jack API
+# use it with
+# % aplay foo.wav
+
+# use this as default
+pcm.!default {
+    type plug
+    slave.pcm "jack"
+    hint.description "Jack Audio"
+}
+#pcm.!default {
+#	type copy
+#	slave.pcm "dsp"
+#}
+
+pcm.dsp {
+	type plug
+	slave {
+		format FLOAT
+		rate unchanged
+		channels unchanged
+		pcm {
+			type ladspa
+			path "/usr/lib/ladspa"
+			playback_plugins [{
+				label "ladspa_dsp"
+			}]
+			slave.pcm {
+				type plug
+				slave {
+					pcm "hw:0"
+					rate unchanged
+					channels unchanged
+				}
+			}
+		}
+	}
+}
